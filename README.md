@@ -1,6 +1,6 @@
 ## PROJECT
 
-This code create a frame that will display a character rotatin in 360 degrees
+This code create a frame that will display a character rotating in 360 degrees
 
 
 
