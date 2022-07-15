@@ -17,7 +17,7 @@ public void paint(Graphics g){
 
 
     //setting backgroundcolor
-    g2d.setColor(Color.RED); 
+    g2d.setColor(Color.black); 
 
 
     //to remove trail of painting
@@ -37,7 +37,7 @@ public void paint(Graphics g){
 
     //getting original transform instance
     AffineTransform saveTransform=g2d.getTransform();
-    g2d.setColor(Color.PINK);
+    g2d.setColor(Color.BLUE);
     Rectangle rect = this.getBounds();
 
     //drawing the axis
@@ -75,7 +75,7 @@ public static void main(String[] args) throws Exception{
         Thread.sleep(10);
         
         //sleeping then increasing angle by 1
-        angdeg=(angdeg>=360)?0:angdeg+1;
+        angdeg=(angdeg>=360)?0:angdeg+10;
 
         //repainting the surface
         rt.repaint();
