@@ -1,2 +1,8 @@
-app.class
+# Ignore class file
+*.class
+
+# Ignore library folder
+lib
+
+#Ignore .vscode folder
 .vscode
