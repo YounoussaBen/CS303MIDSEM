@@ -1,5 +1,5 @@
 # Ignore class file
-*.class
+App.class
 
 # Ignore library folder
 lib
