@@ -3,6 +3,3 @@
 
 # Ignore library folder
 lib
-
-#Ignore .vscode folder
-.vscode/*
