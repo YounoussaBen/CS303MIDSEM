@@ -1,91 +1,80 @@
-import java.awt.*;
-import java.awt.geom.*;
-import java.awt.font.*;
 import javax.swing.*;
-
-public class App extends JPanel{
-
-static int angdeg=0;
-
-// importing paint method to use Graphics library
-
-public void paint(Graphics g){
-
-    // creating 2D graphic object
-    Graphics2D g2d = (Graphics2D) g;
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON); 
+import java.awt.*;
+import java.awt.font.*;
+import java.awt.geom.*;
 
 
-    //setting backgroundcolor
-    g2d.setColor(Color.black); 
-
-
-    //to remove trail of painting
-    g2d.fillRect(0,0,getWidth(),getHeight());
-
-    // creating font
-    Font font =  new Font("bloomsburg",Font.CENTER_BASELINE,150);
-    g2d.setFont(font);  
+public class App extends JPanel {
     
-    //setting font of surface
-    FontRenderContext frc = g2d.getFontRenderContext();
-    TextLayout layout = new TextLayout("&", font, frc);
+    static int angle_degree = 0;
 
-    //getting width & height of the text
-    double sw = layout.getBounds().getWidth();
-    double sh = layout.getBounds().getHeight();
+    public void paint(Graphics global){
 
-    //getting original transform instance
-    AffineTransform saveTransform=g2d.getTransform();
-    g2d.setColor(Color.BLUE);
-    Rectangle rect = this.getBounds();
+        Graphics2D Graphics2D = (Graphics2D) global;
 
-    //drawing the axis
-    g2d.drawLine((int)(rect.width)/2,0,(int)(rect.width)/2,rect.height);
-    g2d.drawLine(0,(int)(rect.height)/2,rect.width,(int)(rect.height)/2);
+        Graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-    /*creating instance set the translation to the mid of the component*/
-    AffineTransform affineTransform = new AffineTransform();
-    affineTransform.setToTranslation((rect.width)/2,(rect.height)/2);
+        Graphics2D.setColor(Color.black);
 
-    //rotate with the anchor point as the mid of the text
-    affineTransform.rotate(Math.toRadians(angdeg), 0, 0);
-    g2d.setTransform(affineTransform);
-    g2d.drawString("&",(int)-sw/2,(int)sh/2);
+        Graphics2D.fillRect(0, 0, getWidth(), getHeight());
 
-    //restoring original transform
-    g2d.setTransform(saveTransform);
+        Font font =  new Font("bloomsburg",Font.CENTER_BASELINE,150);
+
+        Graphics2D.setFont(font);  
+        
+
+        FontRenderContext font_render_context = Graphics2D.getFontRenderContext();
+
+        TextLayout layout = new TextLayout("&", font, font_render_context);
+
+        double s_width = layout.getBounds().getWidth();
+        double s_height = layout.getBounds().getHeight();
+
+        AffineTransform saveTransform = Graphics2D.getTransform();
+        Graphics2D.setColor(Color.blue);
+        Rectangle rectange = this.getBounds();
+
+        Graphics2D.drawLine((int)(rectange.width)/2, 0, (int)(rectange.width)/2, rectange.height);
+        Graphics2D.drawLine(0, (int)(rectange.height)/2, rectange.width, (int)(rectange.height)/2);
+        
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.setToTranslation((rectange.width)/2, (rectange.height)/2);
+
+        affineTransform.rotate(Math.toRadians(angle_degree), 0, 0);
+        Graphics2D.setTransform(affineTransform);
+        Graphics2D.drawString("&", (int)-s_width/2, (int)s_height/2);
+
+        Graphics2D.setTransform(saveTransform);
+        
+
+
 }
 
-public static void main(String[] args) throws Exception{
-    JFrame frame = new JFrame("CS303 Mid Sem");
 
-    App rt = new App();
-
-    frame.add(rt);
-
+public static void main(String[] args) throws InterruptedException {
+    
+    JFrame frame = new JFrame("Computer Graphics MidSem");
+    
+    App rotate = new App();
+    
+    frame.add(rotate);
     frame.setSize(500, 500);
-
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     frame.setLocationRelativeTo(null);
-
     frame.setVisible(true);
+
     while(true){
         Thread.sleep(10);
         
-        //sleeping then increasing angle by 1
-        angdeg=(angdeg>=360)?0:angdeg+10;
+            if(angle_degree >= 360){
+            angle_degree = 0;
+            } else {
+            angle_degree += 5;
+            }
+        
+        rotate.repaint();
+        }
 
-        //repainting the surface
-        rt.repaint();
     }
-  }
-}
 
-/* 
- * INTRODUCTION
- * TOOLS
- * SYSTEM REQUIREMENT
- * DEVELOPMENT PROCESS
- */
+}
