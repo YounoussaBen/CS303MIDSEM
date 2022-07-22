@@ -1,5 +1,6 @@
 # Ignore class file
 *.class
+*.json
 
 # Ignore library folder
 lib
